@@ -200,23 +200,50 @@ const int ALEInterface::lives() {
   return romSettings->lives();
 }
 
+const int ALEInterface::livesB() {
+  if (!romSettings.get()){
+    throw std::runtime_error("ROM not set");
+  }
+  return romSettings->livesB();
+}
+
 // Applies an action to the game and returns the reward. It is the
 // user's responsibility to check if the game has ended and reset
 // when necessary - this method will keep pressing buttons on the
 // game over screen.
 reward_t ALEInterface::act(Action action) {
-  reward_t reward = environment->act(action, PLAYER_B_NOOP);
+  reward_t reward = act_demux(action);
   if (theOSystem->p_display_screen != NULL) {
     theOSystem->p_display_screen->display_screen();
     while (theOSystem->p_display_screen->manual_control_engaged()) {
       Action user_action = theOSystem->p_display_screen->getUserAction();
-      reward += environment->act(user_action, PLAYER_B_NOOP);
+      reward += act_demux(user_action);
       theOSystem->p_display_screen->display_screen();
     }
   }
   return reward;
 }
 
+reward_t ALEInterface::act_demux(Action action){
+    if (action < PLAYER_B_NOOP) {
+        return environment->act(action, PLAYER_B_NOOP);
+    } else {
+        return environment->act(PLAYER_A_NOOP, action);
+    }
+}
+
+reward_t ALEInterface::act2(Action actionA, Action actionB) {
+  reward_t reward = environment->act(actionA, actionB);
+  if (theOSystem->p_display_screen != NULL) {
+    theOSystem->p_display_screen->display_screen();
+    while (theOSystem->p_display_screen->manual_control_engaged()) {
+      Action user_action = theOSystem->p_display_screen->getUserAction();
+      reward += environment->act(actionA, actionB);
+      theOSystem->p_display_screen->display_screen();
+    }
+  }
+  return reward;
+}
 // Returns the vector of legal actions. This should be called only
 // after the rom is loaded.
 ActionVect ALEInterface::getLegalActionSet() {
@@ -226,6 +253,13 @@ ActionVect ALEInterface::getLegalActionSet() {
   return romSettings->getAllActions();
 }
 
+ActionVect ALEInterface::getLegalActionSetB() {
+  if (!romSettings.get()){
+    throw std::runtime_error("ROM not set");
+  }
+  return romSettings->getAllActionsB();
+}
+
 // Returns the vector of the minimal set of actions needed to play
 // the game.
 ActionVect ALEInterface::getMinimalActionSet() {
@@ -233,6 +267,13 @@ ActionVect ALEInterface::getMinimalActionSet() {
     throw std::runtime_error("ROM not set");
   }
   return romSettings->getMinimalActionSet();
+}
+
+ActionVect ALEInterface::getMinimalActionSetB() {
+  if (!romSettings.get()){
+    throw std::runtime_error("ROM not set");
+  }
+  return romSettings->getMinimalActionSetB();
 }
 
 // Returns the frame number since the loading of the ROM

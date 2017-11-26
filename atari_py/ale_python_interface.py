@@ -133,6 +133,8 @@ class ALEInterface(object):
         ale_lib.loadROM(self.obj, _as_bytes(rom_file))
 
     def act(self, action):
+        if isinstance(action, tuple):
+            return ale_lib.act2(int(action[0]), int(action[1]))
         return ale_lib.act(self.obj, int(action))
 
     def game_over(self):

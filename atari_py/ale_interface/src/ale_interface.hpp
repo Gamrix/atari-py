@@ -51,6 +51,7 @@ static const std::string Version = "0.5.1";
    This class interfaces ALE with external code for controlling agents.
  */
 class ALEInterface {
+  reward_t act_demux(Action action);
 public:
   ALEInterface();
   ~ALEInterface();
@@ -80,6 +81,7 @@ public:
   // when necessary - this method will keep pressing buttons on the
   // game over screen.
   reward_t act(Action action);
+  reward_t act2(Action action, Action actionB);
 
   // Indicates if the game has ended.
   bool game_over() const;
@@ -90,16 +92,19 @@ public:
   // Returns the vector of legal actions. This should be called only
   // after the rom is loaded.
   ActionVect getLegalActionSet();
+  ActionVect getLegalActionSetB();
 
   // Returns the vector of the minimal set of actions needed to play
   // the game.
   ActionVect getMinimalActionSet();
+  ActionVect getMinimalActionSetB();
 
   // Returns the frame number since the loading of the ROM
   int getFrameNumber();
 
   // The remaining number of lives.
   const int lives();
+  const int livesB();
 
   // Returns the frame number since the start of the current episode
   int getEpisodeFrameNumber() const;
