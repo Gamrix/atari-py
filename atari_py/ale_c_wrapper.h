@@ -18,6 +18,7 @@ extern "C" {
   void setFloat(ALEInterface *ale,const char *key,float value){ale->setFloat(key,value);}
   void loadROM(ALEInterface *ale,const char *rom_file){ale->loadROM(rom_file);}
   int act(ALEInterface *ale,int action){return ale->act((Action)action);}
+  int act2(ALEInterface *ale,int action, int actionB){return ale->act2((Action)action, (Action) actionB);}
   bool game_over(ALEInterface *ale){return ale->game_over();}
   void reset_game(ALEInterface *ale){ale->reset_game();}
   void getLegalActionSet(ALEInterface *ale,int *actions){

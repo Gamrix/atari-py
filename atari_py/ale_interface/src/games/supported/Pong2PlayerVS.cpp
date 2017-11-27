@@ -51,7 +51,7 @@ void Pong2PlayerVSSettings::step(const System& system) {
     // update the reward
     int left = readRam(&system, 13); // left player score
     int right = readRam(&system, 14); // right player score
-    reward_t score = left - right; // to learn to keep the ball alive we penalize getting points
+    reward_t score = left - right;
     m_reward = score - m_score;
     m_score = score;
 

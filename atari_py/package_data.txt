@@ -280,6 +280,8 @@ ale_interface/src/games/supported/Pitfall.cpp
 ale_interface/src/games/supported/Pitfall.hpp
 ale_interface/src/games/supported/Pong.cpp
 ale_interface/src/games/supported/Pong.hpp
+ale_interface/src/games/supported/Pong2PlayerVS.cpp
+ale_interface/src/games/supported/Pong2PlayerVS.hpp
 ale_interface/src/games/supported/Pooyan.cpp
 ale_interface/src/games/supported/Pooyan.hpp
 ale_interface/src/games/supported/PrivateEye.cpp
@@ -375,6 +377,7 @@ atari_roms/name_this_game.bin
 atari_roms/phoenix.bin
 atari_roms/pitfall.bin
 atari_roms/pong.bin
+atari_roms/pong_2p.bin
 atari_roms/pooyan.bin
 atari_roms/private_eye.bin
 atari_roms/qbert.bin

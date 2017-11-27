@@ -50,7 +50,7 @@ class Pong2PlayerVSSettings : public RomSettings {
         reward_t getRewardB () const;
 
         // the rom-name
-        const char* rom() const { return "pong_2player_vs"; }
+        const char* rom() const { return "pong_2p"; }
 
         // create a new instance of the rom
         RomSettings* clone() const;

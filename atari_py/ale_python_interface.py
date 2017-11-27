@@ -37,6 +37,8 @@ ale_lib.loadROM.argtypes = [c_void_p, c_char_p]
 ale_lib.loadROM.restype = None
 ale_lib.act.argtypes = [c_void_p, c_int]
 ale_lib.act.restype = c_int
+ale_lib.act2.argtypes = [c_void_p, c_int, c_int]
+ale_lib.act2.restype = c_int
 ale_lib.game_over.argtypes = [c_void_p]
 ale_lib.game_over.restype = c_bool
 ale_lib.reset_game.argtypes = [c_void_p]
@@ -134,7 +136,7 @@ class ALEInterface(object):
 
     def act(self, action):
         if isinstance(action, tuple):
-            return ale_lib.act2(int(action[0]), int(action[1]))
+            return ale_lib.act2(self.obj, int(action[0]), int(action[1]))
         return ale_lib.act(self.obj, int(action))
 
     def game_over(self):
