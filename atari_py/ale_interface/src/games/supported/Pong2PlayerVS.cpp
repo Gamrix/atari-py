@@ -84,6 +84,9 @@ bool Pong2PlayerVSSettings::isMinimal(const Action &a) const {
         case PLAYER_A_NOOP:
         case PLAYER_A_RIGHT:
         case PLAYER_A_LEFT:
+        case PLAYER_A_UP:
+        case PLAYER_A_DOWN:
+        case PLAYER_A_FIRE:
             return true;
         default:
             return false;
@@ -132,6 +135,9 @@ ActionVect Pong2PlayerVSSettings::getStartingActions() {
     startingActions.push_back(SELECT);
     startingActions.push_back(PLAYER_A_NOOP);
     startingActions.push_back(SELECT);
+    startingActions.push_back(PLAYER_A_NOOP);
+    startingActions.push_back(SELECT);
+    startingActions.push_back(PLAYER_A_NOOP);
     startingActions.push_back(RESET);
     return startingActions;
 }
